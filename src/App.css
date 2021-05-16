@@ -3,14 +3,14 @@ body {
   color: #fff;
 }
 
+span.current {
+  border-left: 2px solid orange;
+}
+
 span.green {
   color: green;
-  border-bottom: 1px solid green;
-  border-top: 1px solid green;
 }
 
 span.red {
   color: red;
-  border-bottom: 1px solid red;
-  border-top: 1px solid red;
 }

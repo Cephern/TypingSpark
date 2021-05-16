@@ -3,6 +3,7 @@ const Buttons = ({
   handleClickAgainBtn,
   handleClickStartBtn,
   btnText,
+  isFirstPress,
 }) => {
   return (
     <div id="BtnDiv">
@@ -14,6 +15,7 @@ const Buttons = ({
           autoFocus
           type="text"
           onClick={handleClickStartBtn}
+          disabled={!isFirstPress}
         >
           {btnText}
         </button>

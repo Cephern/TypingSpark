@@ -1,10 +1,13 @@
 import "./App.css";
-import Text from "./comps/Text";
+import Main from "./comps/Main";
+import TextContextProvider from "./context/TextContext";
 
 function App() {
   return (
     <div className="App">
-      <Text />
+      <TextContextProvider>
+        <Main />
+      </TextContextProvider>
     </div>
   );
 }
