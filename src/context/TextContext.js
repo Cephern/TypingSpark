@@ -23,10 +23,6 @@ const TextContextProvider = (props) => {
     setText(filteredData);
   }
 
-  useEffect(() => {
-    fetchText();
-  }, []);
-
   return (
     <textContext.Provider value={{ text, setType, setParas, fetchText }}>
       {props.children}

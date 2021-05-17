@@ -4,6 +4,7 @@ import useKeyPress from "../hooks/usePressKey";
 import useTimer from "../hooks/useTimer";
 import Buttons from "./Buttons";
 import Form from "./Form";
+import Keyboard from "./Keyboard";
 import Modal from "./Modal";
 import Stats from "./Stats";
 
@@ -12,6 +13,7 @@ const Text = () => {
   const [isOver, setIsOver] = useState(false);
   const [btnText, setBtnText] = useState("Начать");
   const [textLength, setTextLength] = useState(0);
+  const [pressedKey, setPressedKey] = useState("");
 
   // Stats state
   const [pressesCount, setPressesCount] = useState(0);
@@ -49,8 +51,8 @@ const Text = () => {
     setAccuracy(accuracy - oneSymbolWeight);
   };
 
-  const checkWhenTyping = (pressedChar, currentSpan) => {
-    if (currentSpan.innerText.toLowerCase() === pressedChar) {
+  const checkWhenTyping = (pressedKey, currentSpan) => {
+    if (currentSpan.innerText.toLowerCase() === pressedKey) {
       currentSpan.classList.remove("current");
       if (currentSpan.nextSibling) {
         currentSpan.nextSibling.classList.add("current");
@@ -63,11 +65,11 @@ const Text = () => {
         setIsOver(true);
         setStartTimer(false);
       }
-    } else {
-      currentSpan.classList.remove("green");
-      currentSpan.classList.add("red");
-      calculateAccuracy();
+      return;
     }
+    currentSpan.classList.remove("green");
+    currentSpan.classList.add("red");
+    calculateAccuracy();
   };
 
   // Events
@@ -105,10 +107,10 @@ const Text = () => {
     }
 
     const pressedChar = key.toLowerCase();
-
+    setPressedKey(pressedChar);
     const currentSpan = spans.current.querySelector(`span[id="${index}"]`);
 
-    checkWhenTyping(pressedChar, currentSpan);
+    checkWhenTyping(key, currentSpan);
   });
 
   useTimer(startTimer, time, pressesCount, setTime, setSpeed);
@@ -122,20 +124,23 @@ const Text = () => {
 
   return (
     <main>
-      <Form />
+      <Form
+        setIsOver={setIsOver}
+        setStartTimer={setStartTimer}
+        setIsFirstPress={setIsFirstPress}
+        setIndex={setIndex}
+        setPressesCount={setPressesCount}
+        setSpeed={setSpeed}
+        setAccuracy={setAccuracy}
+        setTime={setTime}
+        setBtnText={setBtnText}
+        spans={spans}
+      />
 
       <Stats time={time} speed={speed} accuracy={accuracy} />
 
       {text && textLength ? (
         <div id="text">
-          <Buttons
-            isOver={isOver}
-            handleClickStartBtn={handleClickStartBtn}
-            handleClickAgainBtn={handleClickAgainBtn}
-            btnText={btnText}
-            isFirstPress={isFirstPress}
-          />
-
           <div className="spans" ref={spans}>
             {text.map((paragraph, index) => (
               <p key={index + "p"}>
@@ -150,10 +155,20 @@ const Text = () => {
               </p>
             ))}
           </div>
+
+          <Buttons
+            isOver={isOver}
+            handleClickStartBtn={handleClickStartBtn}
+            handleClickAgainBtn={handleClickAgainBtn}
+            btnText={btnText}
+            isFirstPress={isFirstPress}
+          />
         </div>
       ) : (
-        <div>Грузим текст...</div>
+        <div>Ожидаем текст...</div>
       )}
+
+      <Keyboard pressedKey={pressedKey} />
 
       {isOver ? (
         <Modal

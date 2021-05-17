@@ -14,3 +14,7 @@ span.green {
 span.red {
   color: red;
 }
+
+span.pressed {
+  color: green;
+}

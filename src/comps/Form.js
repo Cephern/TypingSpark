@@ -1,7 +1,18 @@
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import { textContext } from "../context/TextContext";
 
-const Form = () => {
+const Form = ({
+  setIsOver,
+  setStartTimer,
+  setIsFirstPress,
+  setIndex,
+  setPressesCount,
+  setSpeed,
+  setAccuracy,
+  setTime,
+  setBtnText,
+  spans,
+}) => {
   const { setType, setParas, fetchText } = useContext(textContext);
 
   const handleTypeChange = (e) => {
@@ -15,6 +26,23 @@ const Form = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     fetchText();
+
+    setIsOver(false);
+    setStartTimer(false);
+    setIsFirstPress(true);
+    setIndex(0);
+    setPressesCount(0);
+    setSpeed(0);
+    setAccuracy(100);
+    setTime(0);
+    setBtnText("Начать");
+
+    if (spans.current) {
+      spans.current.querySelectorAll("span").forEach((span) => {
+        span.classList.remove("green") || span.classList.remove("red");
+        span.classList.remove("current");
+      });
+    }
   };
 
   return (
@@ -36,7 +64,7 @@ const Form = () => {
         </select>
       </div>
 
-      <button>Submit</button>
+      <button>Получить текст</button>
     </form>
   );
 };

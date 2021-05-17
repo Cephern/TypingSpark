@@ -1,11 +1,8 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 const useKeyPress = (startTimer, cb) => {
-  const [pressedKey, setPressedKey] = useState();
-
   useEffect(() => {
     const handleKeyPress = ({ key }) => {
-      setPressedKey(key);
       cb && cb(key);
     };
 
@@ -17,8 +14,6 @@ const useKeyPress = (startTimer, cb) => {
       document.removeEventListener("keypress", handleKeyPress);
     };
   });
-
-  return pressedKey;
 };
 
 export default useKeyPress;
