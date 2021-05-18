@@ -4,6 +4,8 @@
 
 <code>
     npm install
+    </code>
+    <code>
     npm start
 </code>
 
@@ -11,6 +13,9 @@
 
 <code>
     npm install
+    </code>
+    <code>
     npm run build
 </code>
- Использовать в деплое папку 'Build'
+
+Использовать в деплое папку 'Build'
