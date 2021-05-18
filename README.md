@@ -4,8 +4,9 @@
 
 <code>
     npm install
-    </code>
-    <code>
+</code>
+
+<code>
     npm start
 </code>
 
@@ -13,8 +14,9 @@
 
 <code>
     npm install
-    </code>
-    <code>
+</code>
+
+<code>
     npm run build
 </code>
 
