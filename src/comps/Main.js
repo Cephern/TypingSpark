@@ -165,7 +165,7 @@ const Text = () => {
           />
         </div>
       ) : (
-        <div>Ожидаем текст...</div>
+        <div id="text">Ожидаем текст...</div>
       )}
 
       <Keyboard pressedKey={pressedKey} />

@@ -6,14 +6,13 @@ const Buttons = ({
   isFirstPress,
 }) => {
   return (
-    <div id="BtnDiv">
+    <div id="btnDiv">
       {isOver ? (
         <button disabled>Все готово!</button>
       ) : (
         <button
           id="charInput"
           autoFocus
-          type="text"
           onClick={handleClickStartBtn}
           disabled={!isFirstPress}
         >
@@ -21,7 +20,9 @@ const Buttons = ({
         </button>
       )}
 
-      <button onClick={handleClickAgainBtn}>Заново</button>
+      <button id="againBtn" onClick={handleClickAgainBtn}>
+        Заново
+      </button>
     </div>
   );
 };
