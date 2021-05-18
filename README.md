@@ -6,6 +6,7 @@
     npm install
 </code>
 
+</br>
 <code>
     npm start
 </code>
@@ -15,7 +16,7 @@
 <code>
     npm install
 </code>
-
+</br>
 <code>
     npm run build
 </code>
